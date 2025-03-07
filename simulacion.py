@@ -1,6 +1,6 @@
-import random  # Para selección aleatoria
-import time    # Para pausas entre turnos
-import json    # Para persistencia de estado
+import random 
+import time    
+import json    
 
 # Clase Sensor
 class Sensor:
@@ -100,6 +100,7 @@ class Building:
             print(f"Error: El archivo {filename} está mal formateado. Falta la clave: {e}")
         except Exception as e:
             print(f"Error inesperado al cargar el estado: {e}")
+            
     def infect_random_room(self):
         # Seleccionar un piso y una habitación al azar
         floor_num = random.randint(0, len(self.floors) - 1)
@@ -243,7 +244,8 @@ def main():
         print("6. Limpiar habitación")
         print("7. Resetear sensor")
         print("8. Guardar estado")
-        print("9. Salir")
+        print("9. Cargar estado")
+        print("10. Salir")
         opcion = input("Selecciona una opción: ")
 
         if opcion == "1":
@@ -300,13 +302,12 @@ def main():
         elif opcion == "8":
             filename = input("Ingresa el nombre del archivo para guardar: ")
             simulacion.building.save_state(filename)
-        elif opcion == "9":  # Opción para cargar el estado
+        elif opcion == "9":  
             filename = input("Ingresa el nombre del archivo para cargar: ")
             if simulacion.building is None:
-                # Si no hay un edificio configurado, creamos uno temporal
-                simulacion.building = Building(1, 1)  # Dimensiones temporales
+                simulacion.building = Building(1, 1) 
             simulacion.building.load_state(filename)
-            simulacion.turn_count = 0  # Reiniciar el contador de turnos
+            simulacion.turn_count = 0  
             print("Estado cargado correctamente. La simulación ha sido sobrescrita.")
         elif opcion == "10":
             print("Saliendo de la simulación. ¡Adiós!")
